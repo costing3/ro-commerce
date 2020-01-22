@@ -7,7 +7,7 @@
 
 @font-face {
   font-family: OpenSans-Regular;
-  src: url('../fonts/OpenSans/OpenSans-Regular.ttf'); 
+  src: url('fonts/OpenSans/OpenSans-Regular.ttf');
 }
 
 
@@ -24,6 +24,7 @@
 body, html {
 	height: 100%;
 	font-family: OpenSans-Regular, sans-serif;
+    background-color: #e9faff;
 }
 
 /*---------------------------------------------*/
