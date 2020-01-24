@@ -23,7 +23,7 @@
 
     <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <img src="images/logo-2.png" width="50" height="30" alt0="Error">
+        <img src="images/logo-2.png" width="50" height="50" alt="Error">
         <a class="navbar-brand" href="#">
             Ro-Commerce</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    My Account
+                    My Account<span class="sr-only">(current)</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="login.jsp">Login</a>
@@ -55,4 +55,4 @@
                 </div>
             </li>
         </div>
-    </nav>
+    </nav><br><br><br><br>
