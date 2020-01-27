@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
         <%-- Bootstrap Includes --%>
@@ -18,10 +18,10 @@
         <%-- //Login Form CSS --%>
 
         <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-        <title> Login</title>
+        <title> RO-Commerce </title>
     </head>
 
-    <body>
+    <body>„
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <img src="images/logo-2.png" width="50" height="50" alt="Error">
         <a class="navbar-brand" href="#">
@@ -38,7 +38,7 @@
             </ul>
             <form class="form-inline my-2 my-lg-0" style="margin-right:25%">
                 <div class="input-group mb-2" style="margin-top: 1%">
-                    <input type="text" name="product-search" class="form-control" size="65" placeholder="Search for a product" aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" name="product-search" class="form-control" size="100%" placeholder="Search for a product" aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </div>

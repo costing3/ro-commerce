@@ -4,7 +4,7 @@
         <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                    <form class="login100-form validate-form"  action="login" method="post">
+                    <form class="login100-form validate-form"  action="${pageContext.request.contextPath}/login" method="post">
 					<span class="login100-form-title p-b-33">
 						Account Login
 					</span>
