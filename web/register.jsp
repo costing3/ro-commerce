@@ -4,19 +4,19 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-            <form class="login100-form validate-form"  action="login" method="post">
+            <form class="login100-form validate-form"  autocomplete="off" action="register" method="post">
 					<span class="login100-form-title p-b-33">
 						Account Register
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate = "Ex. 'John'">
-                    <input class="input100" type="text" name="username" placeholder="First Name">
+                    <input class="input100" type="text" name="firstname" placeholder="First Name">
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate = "Ex. 'Doe'">
-                    <input class="input100" type="text" name="username" placeholder="Last Name">
+                    <input class="input100" type="text" name="lastname" placeholder="Last Name">
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
                 </div>
@@ -38,12 +38,10 @@
                         Register New Account
                     </button>
                 </div>
-
                 <div class="text-center p-t-45 p-b-4">
 						<span class="txt1">
 							Already
 						</span>
-
                     <a href="login.jsp" class="txt2 hov1">
                         have an account?
                     </a>

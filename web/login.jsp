@@ -4,11 +4,12 @@
         <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-                    <form class="login100-form validate-form"  action="${pageContext.request.contextPath}/login" method="post">
+
+                    <form class="login100-form validate-form"  autocomplete="off" action="login" method="post">
 					<span class="login100-form-title p-b-33">
 						Account Login
 					</span>
-
+                        ${errorMessage}
                         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
                             <input class="input100" type="text" name="username" placeholder="Username">
                             <span class="focus-input100-1"></span>
@@ -25,8 +26,8 @@
                             <button class="login100-form-btn">
                                 Sign in
                             </button>
-                        </div>
 
+                        </div>
                         <div class="text-center p-t-45 p-b-4">
 						<span class="txt1">
 							Forgot
