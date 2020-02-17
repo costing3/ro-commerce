@@ -1,5 +1,6 @@
 <%@ page import="java.util.Date" %>
 <%@include file="../includes/header.jsp" %>
+
 <%--================================================================================================================--%>
 
 <div class="card text-center">

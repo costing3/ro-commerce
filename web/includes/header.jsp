@@ -1,4 +1,10 @@
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String userID = (String) session.getAttribute("userID");
+%>
+<%--================================================================================================================--%>
+
 <html>
 <head>
     <%-- Bootstrap Includes --%>
@@ -44,19 +50,30 @@
                 </div>
             </div>
         </form>
-        <button type="button" class="btn btn-primary">
-            My Cart <span class="badge badge-light">4</span>
-        </button>&nbsp;
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
             <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    My Account
-                </button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <a class="dropdown-item" href="login">Login</a><hr>
-                    <a class="dropdown-item" href="register.jsp">Register</a>
-                </div>
+                    <%
+                        if(userID == null)
+                            out.print("My Account </button>" +
+                                    "<div class=\"dropdown-menu\" aria-labelledby=\"btnGroupDrop1\">\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"login\">Log in</a>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"register.jsp\">Register</a>\n" +
+                                    "                </div>");
+                        else
+                            out.print(userID + "</button>" +
+                                    "<div class=\"dropdown-menu\" aria-labelledby=\"btnGroupDrop1\">\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"login\">Account Settings</a>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"login\">My Orders</a><hr>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"register.jsp\">Sign Out</a>\n" +
+                                    "                </div>");
+
+                    %>
             </div>
-        </div>
+        </div>&nbsp;
+        <button type="button" class="btn btn-primary">
+            My Cart <span class="badge badge-light">4</span>
+        </button>&nbsp;
     </div>
 </nav><br><br><br><br>
+<%--================================================================================================================--%>
