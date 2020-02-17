@@ -18,7 +18,7 @@ public class Register extends HttpServlet {
         } else {
 
             request.setAttribute("errorMessage", "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">\n" +
-                    "  <div style=\"text-align: center;\"><strong>Error!</strong></div>There is an account with that username!\nTry to login instead." +
+                    "  <div style=\"text-align: center;\"><strong>Error!</strong></div>There is an account with that username!" +
                     "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
                     "    <span aria-hidden=\"true\">&times;</span>\n" +
                     "  </button>\n" +

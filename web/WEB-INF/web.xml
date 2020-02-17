@@ -4,10 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <welcome-file-list>
-        <welcome-file>webApp.Homepage</welcome-file>
-    </welcome-file-list>
-
     <servlet>
         <servlet-name>ReplaceLogin</servlet-name>   <!-- Whatever name you want -->
         <servlet-class>webApp.Login</servlet-class> <!-- Correct name package.JavaClass -->
@@ -23,18 +19,32 @@
         <servlet-class>webApp.Homepage</servlet-class> <!-- Correct name package.JavaClass -->
     </servlet>
 
+    <servlet>
+        <servlet-name>Welcome</servlet-name>   <!-- Whatever name you want -->
+        <servlet-class>webApp.Welcome</servlet-class> <!-- Correct name package.JavaClass -->
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>ReplaceLogin</servlet-name>       <!-- For servlet named (up there) 'sameName' -->
-        <url-pattern>/login </url-pattern>              <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
+        <url-pattern>/login</url-pattern>              <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>ReplaceRegister</servlet-name>    <!-- For servlet named (up there) 'sameName' -->
-        <url-pattern>/register </url-pattern>           <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
+        <url-pattern>/register</url-pattern>           <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>Homepage</servlet-name>           <!-- For servlet named (up there) 'sameName' -->
-        <url-pattern>/homepage </url-pattern>           <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
+        <url-pattern>/homepage</url-pattern>           <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Welcome</servlet-name>           <!-- For servlet named (up there) 'sameName' -->
+        <url-pattern>/welcome</url-pattern>           <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

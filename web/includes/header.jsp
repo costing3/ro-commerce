@@ -24,7 +24,7 @@
 <body>„
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <img src="images/logo-2.png" width="50" height="50" alt="Error">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="">
         Ro-Commerce</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,14 +33,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="homepage">Home <span class="sr-only">(current)</span></a>
+                <a class="btn btn-secondary" href="homepage">Home <span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" style="margin-right:25%">
+        <form class="form-inline my-2 my-lg-0" style="margin-right:auto">
             <div class="input-group mb-2" style="margin-top: 1%">
                 <input type="text" name="product-search" class="form-control" size="100%" placeholder="Search for a product" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-success" type="submit">Search</button>
                 </div>
             </div>
         </form>
@@ -53,7 +53,7 @@
                     My Account
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <a class="dropdown-item" href="login.jsp">Login</a><hr>
+                    <a class="dropdown-item" href="login">Login</a><hr>
                     <a class="dropdown-item" href="register.jsp">Register</a>
                 </div>
             </div>

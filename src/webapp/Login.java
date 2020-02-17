@@ -16,8 +16,9 @@
             request.setAttribute("user",  request.getParameter("username")); //new variable "user" = login's input field called "username"
             request.setAttribute("pass",  request.getParameter("password")); //new variable "pass" = login's input field called "password"
 
-            if (userObject.correctCredentials(request.getParameter("username"),request.getParameter("password")))
-                request.getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request,response);
+            if (userObject.correctCredentials(request.getParameter("username"),request.getParameter("password"))) {
+                request.getRequestDispatcher("/welcome").forward(request, response);
+            }
             else {
 
                 request.setAttribute("errorMessage", "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">\n" +
@@ -31,5 +32,8 @@
             }
 
         }
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) {}
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            System.out.println(">> User is on 'login.jsp'");
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        }
     }

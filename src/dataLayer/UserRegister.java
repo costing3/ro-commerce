@@ -23,7 +23,7 @@ public class UserRegister {
             stmt = conn.createStatement();
             sql = "SELECT * FROM customers WHERE username = '" + sUserName + "'";
 
-            System.out.println(sql);
+            System.out.println(">> [Executing SQL] " + sql);
 
             rs = stmt.executeQuery(sql);
 

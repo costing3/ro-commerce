@@ -22,12 +22,14 @@ public class UserLogin {
             stmt = conn.createStatement();
             sql = "SELECT * FROM customers WHERE username = '" + sUserName + "' AND password = MD5('" + sUserPassword + "')";
 
-            System.out.println(sql);
+            System.out.println(">> [Executing SQL] " + sql);
 
             rs = stmt.executeQuery(sql);
 
-            if (rs.next())
+            if (rs.next()) {
                 isValidUser = true;
+                System.out.println(">> User found, logged in.");
+            }
 
             rs.close();
         } catch (ClassNotFoundException | SQLException e) {
@@ -40,7 +42,6 @@ public class UserLogin {
                 se.printStackTrace();
             }
         }
-
         return isValidUser;
     }
 }
