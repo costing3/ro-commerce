@@ -1,12 +1,13 @@
 package dataLayer;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UserLogin {
+public class CategoryDisplay {
 
-    public boolean validateCredentials(String sUserName, String sUserPassword) {
-
-        boolean isValidUser = false;
+    public List<String> listCategories() {
+        List<String> categoryList = new ArrayList<>();
 
         Connection conn;
         String sql;
@@ -16,18 +17,16 @@ public class UserLogin {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
+            System.out.println(">> Getting category elements.");
             conn = DriverManager.getConnection(DBConnector.DB_URL, DBConnector.USER, DBConnector.PASS);
 
             stmt = conn.createStatement();
-            sql = "SELECT * FROM customers WHERE username = '" + sUserName + "' AND password = MD5('" + sUserPassword + "')";
-
-            System.out.println(">> [DEBUG][Executing SQL]: " + sql);
+            sql = "SELECT * FROM categories";
 
             rs = stmt.executeQuery(sql);
 
-            if (rs.next()) {
-                isValidUser = true;
-                System.out.println(">> "+ sUserName +" has logged in.");
+            while (rs.next()) {
+                categoryList.add(rs.getString("name"));
             }
 
             rs.close();
@@ -41,6 +40,7 @@ public class UserLogin {
                 se.printStackTrace();
             }
         }
-        return isValidUser;
+
+        return categoryList;
     }
 }

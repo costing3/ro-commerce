@@ -1,7 +1,11 @@
-<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="dataLayer.CategoryDisplay" %>
+<%@ page import="java.util.List"%>
 <%
-    String userID = (String) session.getAttribute("userID");
+    String userID = (String) session.getAttribute("userID"); // Logged in user's name
+//    session.setAttribute("cartItems",0);
+//    int cartItems = Integer.parseInt((String) session.getAttribute("cartItems")); // Number of items the user has -- not working fml
+    int cartItems = 0; //TODO: Make it dynamic, see above.
 %>
 <%--================================================================================================================--%>
 
@@ -32,6 +36,7 @@
     <img src="images/logo-2.png" width="50" height="50" alt="Error">
     <a class="navbar-brand" href="">
         Ro-Commerce</a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -39,41 +44,61 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="btn btn-secondary" href="homepage">Home <span class="sr-only">(current)</span></a>
+                <a class="btn btn-secondary" href="homepage"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                <div class="btn-group" role="group" aria-label="Dropdown">
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-stream"></i>&nbsp;
+                            Categories
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            <%
+                                CategoryDisplay categories = new CategoryDisplay();
+                                List<String> categoryItems = categories.listCategories();
+                                int numberOfCategories = categoryItems.size();
+
+                                for(int i=0; i<numberOfCategories; i++)
+                                    out.print("<a class=\"dropdown-item\" href=\"#\"> "+ categoryItems.get(i) +"</a>");
+                            %>
+                        </div>
+                    </div>
+                </div>
             </li>
         </ul>
+
         <form class="form-inline my-2 my-lg-0" style="margin-right:auto">
             <div class="input-group mb-2" style="margin-top: 1%">
                 <input type="text" name="product-search" class="form-control" size="100%" placeholder="Search for a product" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-success" type="submit">Search</button>
+                    <button class="btn btn-success" type="submit"><i class="fas fa-search"></i> Search</button>
                 </div>
             </div>
         </form>
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <div class="btn-group" role="group" aria-label="Dropdown">
             <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button id="btnGroupDrop2" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <%
                         if(userID == null)
-                            out.print("My Account </button>" +
+                            out.print("<i class=\"fas fa-user-circle fa-lg\"></i> My Account </button>" +
                                     "<div class=\"dropdown-menu\" aria-labelledby=\"btnGroupDrop1\">\n" +
-                                    "                    <a class=\"dropdown-item\" href=\"login\">Log in</a>\n" +
-                                    "                    <a class=\"dropdown-item\" href=\"register.jsp\">Register</a>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"login\"><i class=\"fas fa-sign-out-alt\"></i> Log in</a>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"register.jsp\"><i class=\"fas fa-plus-circle\"></i> Create an account</a>\n" +
                                     "                </div>");
                         else
-                            out.print(userID + "</button>" +
+                            out.print("<i class=\"fas fa-user-circle fa-lg\"></i> " + userID + " </button>" +
                                     "<div class=\"dropdown-menu\" aria-labelledby=\"btnGroupDrop1\">\n" +
-                                    "                    <a class=\"dropdown-item\" href=\"login\">Account Settings</a>\n" +
-                                    "                    <a class=\"dropdown-item\" href=\"login\">My Orders</a><hr>\n" +
-                                    "                    <a class=\"dropdown-item\" href=\"register.jsp\">Sign Out</a>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"login\"><i class=\"fas fa-user-cog\"></i> Account Settings</a>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"login\"><i class=\"fas fa-history\"></i> My Orders</a><hr>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"logout.jsp\"><i class=\"fas fa-sign-out-alt\"></i> Sign Out</a>\n" +
                                     "                </div>");
 
                     %>
             </div>
         </div>&nbsp;
-        <button type="button" class="btn btn-primary">
-            My Cart <span class="badge badge-light">4</span>
+        <button type="button" class="btn btn-primary"><i class="fas fa-shopping-cart"></i>
+            My Cart <span class="badge badge-light"><% out.print(cartItems); %></span>
         </button>&nbsp;
     </div>
 </nav><br><br><br><br>
+
 <%--================================================================================================================--%>
+<script src="https://kit.fontawesome.com/dfcda71f9c.js" crossorigin="anonymous"></script>

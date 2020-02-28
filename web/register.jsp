@@ -1,11 +1,14 @@
 <%@include file="includes/header.jsp" %>
+<% if(session.getAttribute("userID") != null)
+    response.sendRedirect("homepage");
+%>
 <%--================================================================================================================--%>
-
+<%--TODO: Make servlet shortcut "/REGISTER"--%>
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
             <form class="login100-form validate-form"  autocomplete="off" action="register" method="post">
-					<span class="login100-form-title p-b-33">
+					<span class="login100-form-title p-b-33"><i class="fas fa-plus-circle fa-3x"></i><br>
 						Account Register
 					</span>
 
@@ -34,12 +37,12 @@
                 </div>
 
                 <div class="container-login100-form-btn m-t-20">
-                    <button class="login100-form-btn">
+                    <button class="login100-form-btn"><i class="fas fa-plus-circle"></i>&nbsp;
                         Register New Account
                     </button>
                 </div>
                 <div class="text-center p-t-45 p-b-4">
-						<span class="txt1">
+						<span class="txt1"><i class="fas fa-sign-out-alt"></i>
 							Already
 						</span>
                     <a href="login.jsp" class="txt2 hov1">

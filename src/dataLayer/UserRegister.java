@@ -16,20 +16,18 @@ public class UserRegister {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            System.out.println(">> [REGISTER] Opening DB Connection... ");
             conn = DriverManager.getConnection(DBConnector.DB_URL, DBConnector.USER, DBConnector.PASS);
 
-            System.out.println(">> Verifying if the user exists. ");
             stmt = conn.createStatement();
             sql = "SELECT * FROM customers WHERE username = '" + sUserName + "'";
 
-            System.out.println(">> [Executing SQL] " + sql);
+            System.out.println(">> [DEBUG][Executing SQL]: " + sql);
 
             rs = stmt.executeQuery(sql);
 
 
             if (!rs.next()) {
-                System.out.println(">> Inserting new user into the database. ");
+                System.out.println(">> "+ sFirstName +" has registered. ");
                 sql = "INSERT INTO customers (firstname, lastname, username, password) values ('" + sFirstName + "', '" + sLastName + "', '" + sUserName + "', MD5('" + sUserPassword + "'))";
 
                 System.out.println(sql);

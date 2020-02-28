@@ -1,4 +1,7 @@
 <%@include file="includes/header.jsp" %>
+<% if(session.getAttribute("userID") != null)
+    response.sendRedirect("homepage");
+%>
 <%--================================================================================================================--%>
 
         <div class="limiter">
@@ -6,7 +9,7 @@
                 <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
 
                     <form class="login100-form validate-form"  autocomplete="off" method="post">
-					<span class="login100-form-title p-b-33">
+					<span class="login100-form-title p-b-33"><i class="fas fa-sign-out-alt fa-3x"></i><br>
 						Account Login
 					</span>
                         ${errorMessage}
@@ -23,13 +26,13 @@
                         </div>
 
                         <div class="container-login100-form-btn m-t-20">
-                            <button class="login100-form-btn">
+                            <button class="login100-form-btn"><i class="fas fa-sign-out-alt"></i>&nbsp;
                                 Sign in
                             </button>
 
                         </div>
                         <div class="text-center p-t-45 p-b-4">
-						<span class="txt1">
+						<span class="txt1"><i class="fas fa-key"></i>
 							Forgot
 						</span>
 
@@ -39,8 +42,8 @@
                         </div>
 
                         <div class="text-center">
-						<span class="txt1">
-							Create an account?
+						<span class="txt1"><i class="fas fa-plus-circle"></i>
+							Don't have an account?
 						</span>
 
                             <a href="#" class="txt2 hov1">

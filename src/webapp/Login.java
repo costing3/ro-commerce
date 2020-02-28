@@ -6,6 +6,7 @@
     import javax.servlet.http.HttpServlet;
     import javax.servlet.http.HttpServletRequest;
     import javax.servlet.http.HttpServletResponse;
+    import javax.servlet.http.HttpSession;
     import java.io.IOException;
 
     public class Login extends HttpServlet {
@@ -16,8 +17,12 @@
             request.setAttribute("user",  request.getParameter("username")); //new variable "user" = login's input field called "username"
             request.setAttribute("pass",  request.getParameter("password")); //new variable "pass" = login's input field called "password"
 
-            if (userObject.correctCredentials(request.getParameter("username"),request.getParameter("password"))) {
-                request.getRequestDispatcher("/welcome").forward(request, response);
+            if (userObject.correctCredentials(request.getParameter("username"),request.getParameter("password"))) { //TODO: Get more info about the logged in user
+
+                HttpSession session = request.getSession(false);
+                session.setAttribute("userID",request.getParameter("username"));
+                session.setAttribute("cartItems", 0); //TODO: Get info from database or set to 0 on login & logout?
+                response.sendRedirect("homepage");
             }
             else {
 
@@ -33,7 +38,6 @@
 
         }
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            System.out.println(">> User is on 'login.jsp'");
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
