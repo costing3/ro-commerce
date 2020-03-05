@@ -1,13 +1,14 @@
 package dataLayer;
 
+import javax.servlet.http.HttpServlet;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryDisplay {
+public class CategoryDisplay extends HttpServlet {
+    List<String> categoryList = new ArrayList<>();
 
-    public List<String> listCategories() {
-        List<String> categoryList = new ArrayList<>();
+    public List<String> getCategories() {
 
         Connection conn;
         String sql;
@@ -17,16 +18,18 @@ public class CategoryDisplay {
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            System.out.println(">> Getting category elements.");
+//            System.out.println(">> Getting category elements."); // Too many console messages
             conn = DriverManager.getConnection(DBConnector.DB_URL, DBConnector.USER, DBConnector.PASS);
 
             stmt = conn.createStatement();
-            sql = "SELECT * FROM categories";
+            sql = "SELECT name FROM categories";
 
             rs = stmt.executeQuery(sql);
 
+            System.out.println(">> Getting categories");
+
             while (rs.next()) {
-                categoryList.add(rs.getString("name"));
+                categoryList.add(rs.getString(1));
             }
 
             rs.close();
@@ -40,7 +43,6 @@ public class CategoryDisplay {
                 se.printStackTrace();
             }
         }
-
         return categoryList;
     }
 }

@@ -20,9 +20,17 @@
     </servlet>
 
     <servlet>
+        <servlet-name>Search</servlet-name>   <!-- Whatever name you want -->
+        <servlet-class>webApp.Search</servlet-class> <!-- Correct name package.JavaClass -->
+    </servlet>
+
+    <servlet>
         <servlet-name>Welcome</servlet-name>   <!-- Whatever name you want -->
         <servlet-class>webApp.Welcome</servlet-class> <!-- Correct name package.JavaClass -->
     </servlet>
+
+    <!--    UP | SERVLETS  -->
+    <!--  DOWN | MAPPING  -->
 
     <servlet-mapping>
         <servlet-name>ReplaceLogin</servlet-name>       <!-- For servlet named (up there) 'sameName' -->
@@ -44,7 +52,20 @@
         <url-pattern>/welcome</url-pattern>           <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>           <!-- For servlet named (up there) 'sameName' -->
+        <url-pattern>/search</url-pattern>           <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+    <!--    UP | MAPPING  -->
+    <!--  DOWN | PARAMETERS  -->
+
+    <context-param>
+        <param-name>AppName</param-name>
+        <param-value>Ro-Commerce</param-value>
+    </context-param>
 </web-app>

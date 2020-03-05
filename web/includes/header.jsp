@@ -1,8 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page import="dataLayer.CategoryDisplay" %>
 <%@ page import="java.util.List"%>
 <%
-    String userID = (String) session.getAttribute("userID"); // Logged in user's name
+    String userID = (String) session.getAttribute("uID"); // Logged in user's name
+    List<String> categoryItems = (List<String>) session.getAttribute("categories");
+
 //    session.setAttribute("cartItems",0);
 //    int cartItems = Integer.parseInt((String) session.getAttribute("cartItems")); // Number of items the user has -- not working fml
     int cartItems = 0; //TODO: Make it dynamic, see above.
@@ -51,13 +53,16 @@
                             Categories
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <%
+                            <% //TODO: Maybe make it load only once per server start/restart? :D
                                 CategoryDisplay categories = new CategoryDisplay();
-                                List<String> categoryItems = categories.listCategories();
-                                int numberOfCategories = categoryItems.size();
 
-                                for(int i=0; i<numberOfCategories; i++)
-                                    out.print("<a class=\"dropdown-item\" href=\"#\"> "+ categoryItems.get(i) +"</a>");
+                                if(session.getAttribute("categories")==null) {
+                                    categoryItems = categories.getCategories();
+                                    session.setAttribute("categories",categoryItems);
+                                }
+
+                                for (String categoryItem : categoryItems)
+                                    out.print("<a class=\"dropdown-item\" href=\"#\"> " + categoryItem + "</a>");
                             %>
                         </div>
                     </div>
@@ -65,9 +70,9 @@
             </li>
         </ul>
 
-        <form class="form-inline my-2 my-lg-0" style="margin-right:auto">
+        <form class="form-inline my-2 my-lg-0" style="margin-right:auto" method="post" action="search">
             <div class="input-group mb-2" style="margin-top: 1%">
-                <input type="text" name="product-search" class="form-control" size="100%" placeholder="Search for a product" aria-label="Search" aria-describedby="basic-addon2">
+                <input type="text" name="product-search" class="form-control" size="50%" placeholder="Search for a product" aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-success" type="submit"><i class="fas fa-search"></i> Search</button>
                 </div>
@@ -81,13 +86,13 @@
                             out.print("<i class=\"fas fa-user-circle fa-lg\"></i> My Account </button>" +
                                     "<div class=\"dropdown-menu\" aria-labelledby=\"btnGroupDrop1\">\n" +
                                     "                    <a class=\"dropdown-item\" href=\"login\"><i class=\"fas fa-sign-out-alt\"></i> Log in</a>\n" +
-                                    "                    <a class=\"dropdown-item\" href=\"register.jsp\"><i class=\"fas fa-plus-circle\"></i> Create an account</a>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"register\"><i class=\"fas fa-plus-circle\"></i> Create an account</a>\n" +
                                     "                </div>");
                         else
                             out.print("<i class=\"fas fa-user-circle fa-lg\"></i> " + userID + " </button>" +
                                     "<div class=\"dropdown-menu\" aria-labelledby=\"btnGroupDrop1\">\n" +
-                                    "                    <a class=\"dropdown-item\" href=\"login\"><i class=\"fas fa-user-cog\"></i> Account Settings</a>\n" +
-                                    "                    <a class=\"dropdown-item\" href=\"login\"><i class=\"fas fa-history\"></i> My Orders</a><hr>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"#\"><i class=\"fas fa-user-cog\"></i> Account Settings</a>\n" +
+                                    "                    <a class=\"dropdown-item\" href=\"#\"><i class=\"fas fa-history\"></i> My Orders</a><hr>\n" +
                                     "                    <a class=\"dropdown-item\" href=\"logout.jsp\"><i class=\"fas fa-sign-out-alt\"></i> Sign Out</a>\n" +
                                     "                </div>");
 

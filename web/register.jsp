@@ -3,7 +3,7 @@
     response.sendRedirect("homepage");
 %>
 <%--================================================================================================================--%>
-<%--TODO: Make servlet shortcut "/REGISTER"--%>
+<%--DONETODO: Make servlet shortcut "/REGISTER"--%>
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
@@ -24,7 +24,7 @@
                     <span class="focus-input100-2"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                <div class="wrap-input100 validate-input" data-validate = "Valid email is required: name@domain.country">
                     <input class="input100" type="text" name="username" placeholder="Username">
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
@@ -45,7 +45,7 @@
 						<span class="txt1"><i class="fas fa-sign-out-alt"></i>
 							Already
 						</span>
-                    <a href="login.jsp" class="txt2 hov1">
+                        <a href="login" class="txt2 hov1">
                         have an account?
                     </a>
                 </div>

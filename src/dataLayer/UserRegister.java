@@ -29,8 +29,9 @@ public class UserRegister {
             if (!rs.next()) {
                 System.out.println(">> "+ sFirstName +" has registered. ");
                 sql = "INSERT INTO customers (firstname, lastname, username, password) values ('" + sFirstName + "', '" + sLastName + "', '" + sUserName + "', MD5('" + sUserPassword + "'))";
+                
+                System.out.println(">> [DEBUG][Executing SQL]: " + sql);
 
-                System.out.println(sql);
                 stmt.executeUpdate(sql);
 
             } else
