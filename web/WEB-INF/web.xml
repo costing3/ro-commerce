@@ -25,8 +25,8 @@
     </servlet>
 
     <servlet>
-        <servlet-name>Welcome</servlet-name>   <!-- Whatever name you want -->
-        <servlet-class>webApp.Welcome</servlet-class> <!-- Correct name package.JavaClass -->
+        <servlet-name>MyProduct</servlet-name>
+        <servlet-class>webApp.ProductDetails</servlet-class>
     </servlet>
 
     <!--    UP | SERVLETS  -->
@@ -48,13 +48,13 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>Welcome</servlet-name>           <!-- For servlet named (up there) 'sameName' -->
-        <url-pattern>/welcome</url-pattern>           <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
+        <servlet-name>Search</servlet-name>           <!-- For servlet named (up there) 'sameName' -->
+        <url-pattern>/search</url-pattern>           <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>Search</servlet-name>           <!-- For servlet named (up there) 'sameName' -->
-        <url-pattern>/search</url-pattern>           <!-- Redirects to "/thisName", no need to be the named as the Servlet -->
+        <servlet-name>MyProduct</servlet-name>
+        <url-pattern>/product</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>

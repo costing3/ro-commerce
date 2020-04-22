@@ -24,13 +24,13 @@
 body, html {
 	height: 100%;
 	font-family: OpenSans-Regular, sans-serif;
-    background-color: #e9faff;
 }
 
 /*---------------------------------------------*/
-a {
+#title {
 	font-family: OpenSans-Regular;
-	font-size: 14px;
+	font-size: 16px;
+    font-weight: bold;
 	line-height: 1.7;
 	color: #666666;
 	margin: 0px;
@@ -38,6 +38,12 @@ a {
 	-webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
+}
+
+table.center {
+  background-color:#e9ebee;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 a:focus {
@@ -59,6 +65,14 @@ p {
 	line-height: 1.7;
 	color: #666666;
 	margin: 0px;
+}
+
+#title p {
+  font-family: "Open Sans",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #666666;
+  margin: 0px;
 }
 
 ul, li {

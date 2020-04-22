@@ -11,6 +11,7 @@
 					<span class="login100-form-title p-b-33"><i class="fas fa-sign-out-alt fa-3x"></i><br>
 						Account Login
 					</span>
+<%--                        TODO: Data validation!!--%>
                         ${errorMessage} <!-- OR --> ${successMessage}
                         <%
                             session.setAttribute("errorMessage",null);

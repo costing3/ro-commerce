@@ -11,7 +11,7 @@
 					<span class="login100-form-title p-b-33"><i class="fas fa-plus-circle fa-3x"></i><br>
 						Account Register
 					</span>
-
+<%--                        TODO: Data validation!!--%>
                 <div class="wrap-input100 validate-input" data-validate = "Ex. 'John'">
                     <input class="input100" type="text" name="firstname" placeholder="First Name">
                     <span class="focus-input100-1"></span>

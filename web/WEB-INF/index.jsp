@@ -1,28 +1,30 @@
 <%@ page import="java.util.Date" %>
 <%@include file="../includes/header.jsp" %>
 <%--================================================================================================================--%>
+<div class="container-fluid">
+    <div class="row">
+<div class="d-flex" id="wrapper">
 
-<div class="card text-center">
-    <div class="card-header">
-        Featured
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper" style="display: inline-block; float: left;">
+        <div class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action bg-light">Sales</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">New Products</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Altceva</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">asd</a><br>
+            <a href="#" class="list-group-item list-group-item-action bg-light">Refund Policy</a>
+            <a href="#" class="list-group-item list-group-item-action bg-light">About Us</a>
+        </div>
     </div>
-    <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        HAI CU ALGORITMU
     </div>
-    <div class="card-footer text-muted">
-        2 days ago
-    </div>
+    <!-- /#page-content-wrapper -->
+</div></div>
 </div>
-<h3>
-    <a href="../login.jsp">How about you go to the login page? </a>
-</h3>
-
-<%
-    Date today = new Date();
-    out.print("<h2>" + today.toString() + "</h2>");
-%>
 
 <%--================================================================================================================--%>
 <%@include file="../includes/footer.jsp" %>

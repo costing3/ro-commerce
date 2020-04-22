@@ -3,8 +3,8 @@
 <%@ page import="java.util.List"%>
 <%
     String userID = (String) session.getAttribute("uID"); // Logged in user's name
+    String searchedItem = request.getParameter("query"); // Did the user search anything?
     List<String> categoryItems = (List<String>) session.getAttribute("categories");
-
 //    session.setAttribute("cartItems",0);
 //    int cartItems = Integer.parseInt((String) session.getAttribute("cartItems")); // Number of items the user has -- not working fml
     int cartItems = 0; //TODO: Make it dynamic, see above.
@@ -29,11 +29,20 @@
     <link rel="stylesheet" type="text/css" href="css/login/util.css">
     <%-- //Login Form CSS --%>
 
+    <%-- Other CSS --%>
+    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+    <%-- //Other CSS --%>
+
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-    <title> RO-Commerce </title>
+
+    <title>
+        <% if(session.getAttribute("title")==null) out.print("Ro-Commerce");
+                else out.print(session.getAttribute("title"));
+        %>
+    </title>
 </head>
 
-<body>„
+<body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <img src="images/logo-2.png" width="50" height="50" alt="Error">
     <a class="navbar-brand" href="">
@@ -53,10 +62,10 @@
                             Categories
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <% //TODO: Maybe make it load only once per server start/restart? :D
+                            <%
                                 CategoryDisplay categories = new CategoryDisplay();
 
-                                if(session.getAttribute("categories")==null) {
+                                if(session.getAttribute("categories") == null) {
                                     categoryItems = categories.getCategories();
                                     session.setAttribute("categories",categoryItems);
                                 }
@@ -70,9 +79,9 @@
             </li>
         </ul>
 
-        <form class="form-inline my-2 my-lg-0" style="margin-right:auto" method="post" action="search">
-            <div class="input-group mb-2" style="margin-top: 1%">
-                <input type="text" name="product-search" class="form-control" size="50%" placeholder="Search for a product" aria-label="Search" aria-describedby="basic-addon2">
+        <form class="form-inline my-2 my-lg-0" style="margin-right:auto;" method="get" action="search">
+            <div class="input-group mb-2" style="margin-top: 9px">
+                <input type="text" name="query" class="form-control" size="50%" placeholder="Searching for anything? Try looking it up." aria-label="Search" aria-describedby="basic-addon2" value="<%if((searchedItem)!=null) out.print(searchedItem); %>">
                 <div class="input-group-append">
                     <button class="btn btn-success" type="submit"><i class="fas fa-search"></i> Search</button>
                 </div>
@@ -103,7 +112,7 @@
             My Cart <span class="badge badge-light"><% out.print(cartItems); %></span>
         </button>&nbsp;
     </div>
-</nav><br><br><br><br>
+</nav><br><br><br>
 
 <%--================================================================================================================--%>
 <script src="https://kit.fontawesome.com/dfcda71f9c.js" crossorigin="anonymous"></script>
