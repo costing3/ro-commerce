@@ -22,27 +22,21 @@ public class Product {
     public void setID(Integer ID){
         this.ID = ID;
     }
-
     public void setName(String name){
         this.name = name;
     }
-
     public void setPrice(double price){
         this.price = price;
     }
-
     public void setQuantity(Integer quantity){
         this.quantity = quantity;
     }
-
     public void setRating(Float rating){
         this.rating = rating;
     }
-
     public void setDescription(String description){
         this.description = description;
     }
-
     public void setImageLink(String imageLink) {
         this.imageLink = imageLink;
     }
@@ -71,32 +65,42 @@ public class Product {
         else return defaultImage;
     }
 
-    public List<Product> getProducts(String searchString) {
+    public List<Product> getProducts(String searchString, Integer userID) {
         List<Product> productArrayList = new ArrayList<>();
 
         Connection conn;
         String sql;
         Statement stmt = null;
 
-        ResultSet rs;
+        ResultSet rs = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
             conn = DriverManager.getConnection(DBConnector.DB_URL, DBConnector.USER, DBConnector.PASS);
 
             stmt = conn.createStatement();
-            sql = "SELECT product_id,name,price,quantity,image_link FROM products where name LIKE '%"+ searchString +"%';";
-            rs = stmt.executeQuery(sql);
-            System.out.println(">> Searching for '" + searchString + "'");
+            if(userID==null) {
+                sql = "SELECT product_id,name,price,quantity,image_link FROM products where name LIKE '%" + searchString + "%';";
 
-            while (rs.next()) {
-                Product item = new Product();
-                item.setID(rs.getInt(1));
-                item.setName(rs.getString(2));
-                item.setPrice(rs.getDouble(3));
-                item.setQuantity(rs.getInt(4));
-                item.setImageLink(rs.getString(5));
-                productArrayList.add(item);
+                rs = stmt.executeQuery(sql);
+                System.out.println(">> Searching for products by '" + searchString);
+
+                while (rs.next()) {
+                    Product item = new Product();
+                    item.setID(rs.getInt(1));
+                    item.setName(rs.getString(2));
+                    item.setPrice(rs.getDouble(3));
+                    item.setQuantity(rs.getInt(4));
+                    item.setImageLink(rs.getString(5));
+                    productArrayList.add(item);
+                }
+            }
+            else if(searchString == null){
+                sql = "select name, price, image_link from products, shoppingcarts\n" +
+                        "where customer_id = "+ userID +" AND product_id\n" +
+                        "in (product0_id, product1_id, product2_id, product3_id, product4_id, product5_id, product6_id, product7_id, product8_id, product9_id);";
+
+                rs = stmt.executeQuery(sql);
             }
             rs.close();
 
@@ -113,7 +117,7 @@ public class Product {
         return productArrayList;
     }
 
-    public Product getProduct(Integer product_id) {
+    public Product getProduct(Integer productID) {
         Product myProduct = new Product();
 
         Connection conn;
@@ -127,9 +131,9 @@ public class Product {
             conn = DriverManager.getConnection(DBConnector.DB_URL, DBConnector.USER, DBConnector.PASS);
 
             stmt = conn.createStatement();
-            sql = "SELECT product_id,name,price,quantity,rating,description,image_link FROM products where product_id = " + product_id + "";
+            sql = "SELECT product_id,name,price,quantity,rating,description,image_link FROM products where product_id = " + productID + "";
             rs = stmt.executeQuery(sql);
-            System.out.println(">> Searching for a specific product details, by id: #" + product_id);
+            System.out.println(">> Getting details for product no." + productID);
 
             while (rs.next()) {
                 myProduct.setID(rs.getInt(1));

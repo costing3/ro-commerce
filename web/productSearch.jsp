@@ -17,10 +17,10 @@
                     out.print("<div class=\"card-body\">");
 
                     // TODO: dynamic image
-                    out.print("<img src=\""+ product.getImageLink()+ "\"width=\"200\" height=\"200\"><hr>");
+                    out.print("<a href=\"product?id="+ product.getID() +"\"><img src=\""+ product.getImageLink()+ "\"width=\"200\" height=\"200\"></a><hr>");
 
-                    if(product.getName().length()>89) out.print("<h5 class=\"card-title\"> <a id= \"title\" href=\"#\" data-toggle=\"tooltip\" title=\""+ product.getName() +"\">" + product.getName().substring(0,89) + "[...]</a></h5><hr>");
-                    else out.print("<div style=\"height:81px\"><h5 class=\"card-title\"> <a id=\"title\" href=\"#\" data-toggle=\"tooltip\" title=\""+ product.getName() +"\"> " + product.getName() + "</h5></div><hr>");
+                    if(product.getName().length()>89) out.print("<h5 class=\"card-title\"> <a id= \"title\" href=\"product?id="+ product.getID() +"\" data-toggle=\"tooltip\" title=\""+ product.getName() +"\">" + product.getName().substring(0,89) + "[...]</a></h5><hr>");
+                    else out.print("<div style=\"height:81px\"><h5 class=\"card-title\"> <a id=\"title\" href=\"product?id="+ product.getID() +"\" data-toggle=\"tooltip\" title=\""+ product.getName() +"\"> " + product.getName() + "</h5></div><hr>");
 
                     int quantity = product.getQuantity();
                     if (quantity>=1) out.print("<hp class=\"card-text\"> <p style=\"color: green;\"> In Stock </p>");
@@ -28,7 +28,7 @@
 
                     out.print("<p class=\"card-text\"><b>" + product.getPrice() + "</b> RON</p>");
 
-                    out.print("<a href=\"product?id="+ product.getID() + "\" class=\"btn btn-warning\"><i class=\"fas fa-info-circle\"></i> See details</a>");
+                    out.print("<a href=\"product?id="+ product.getID() +"\" class=\"btn btn-warning\"><i class=\"fas fa-info-circle\"></i> See details</a>");
 
                     out.print("</td></div></div>");
 
@@ -37,6 +37,7 @@
                         out.print("<br><hr></tr>");
                 }
                 out.print("</table>");
+                session.setAttribute("cartItems",0);
             %>
         </div>
     </div>

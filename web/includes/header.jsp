@@ -3,11 +3,13 @@
 <%@ page import="java.util.List"%>
 <%
     String userID = (String) session.getAttribute("uID"); // Logged in user's name
-    String searchedItem = request.getParameter("query"); // Did the user search anything?
+    String searchedItem = request.getParameter("query"); // Did the user search for anything? Yes - Fill the search bar, No - Do nothing
     List<String> categoryItems = (List<String>) session.getAttribute("categories");
-//    session.setAttribute("cartItems",0);
-//    int cartItems = Integer.parseInt((String) session.getAttribute("cartItems")); // Number of items the user has -- not working fml
-    int cartItems = 0; //TODO: Make it dynamic, see above.
+
+    int cartItems;
+    if(session.getAttribute("cartItems") != null)
+        cartItems = (Integer)session.getAttribute("cartItems");
+    else cartItems=0;
 %>
 <%--================================================================================================================--%>
 
@@ -108,9 +110,13 @@
                     %>
             </div>
         </div>&nbsp;
-        <button type="button" class="btn btn-primary"><i class="fas fa-shopping-cart"></i>
-            My Cart <span class="badge badge-light"><% out.print(cartItems); %></span>
-        </button>&nbsp;
+        <a href="cart">
+            <button type="button" class="btn btn-primary"><i class="fas fa-shopping-cart"></i>
+            My Cart <span class="badge badge-light">
+                    <% out.print(cartItems); %>
+                </span>
+            </button>&nbsp;
+        </a>
     </div>
 </nav><br><br><br>
 
