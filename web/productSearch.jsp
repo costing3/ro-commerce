@@ -37,7 +37,6 @@
                         out.print("<br><hr></tr>");
                 }
                 out.print("</table>");
-                session.setAttribute("cartItems",0);
             %>
         </div>
     </div>

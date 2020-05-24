@@ -1,6 +1,13 @@
 <%@include file="includes/header.jsp" %>
-<% if(session.getAttribute("userID") != null)
+<% if(session.getAttribute("uID") != null) {
+    session.setAttribute("warningMessage", "<div style=\"position: absolute; right: 0px;\" class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">\n" +
+            "  <strong>You're logged in!<br></strong>You're unable to create another account while signed in! <a href=\"logout.jsp\">Log out</a> first.\n" +
+            "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
+            "    <span aria-hidden=\"true\">&times;</span>\n" +
+            "  </button>\n" +
+            "</div>");
     response.sendRedirect("homepage");
+}
 %>
 <%--================================================================================================================--%>
 <%--DONETODO: Make servlet shortcut "/REGISTER"--%>

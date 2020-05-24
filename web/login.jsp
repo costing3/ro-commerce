@@ -1,7 +1,14 @@
 <%@include file="includes/header.jsp" %>
-<% if(session.getAttribute("userID") != null)
-    response.sendRedirect("homepage");
-%>
+<%--<% if(session.getAttribute("uID") != null) {--%>
+<%--    session.setAttribute("warningMessage", "<div style=\"position: absolute; right: 0px;\" class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">\n" +--%>
+<%--            "  <strong>You're already logged in!<br></strong>You are already logged in! If you want to sign in as a different user, <a href=\"logout.jsp\">log out</a> first.\n" +--%>
+<%--            "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +--%>
+<%--            "    <span aria-hidden=\"true\">&times;</span>\n" +--%>
+<%--            "  </button>\n" +--%>
+<%--            "</div>");--%>
+<%--    response.sendRedirect("homepage");--%>
+<%--}--%>
+<%--%>--%>
 <%--================================================================================================================--%>
         <div class="limiter">
             <div class="container-login100">
@@ -12,9 +19,10 @@
 						Account Login
 					</span>
 <%--                        TODO: Data validation!!--%>
-                        ${errorMessage} <!-- OR --> ${successMessage}
+                        ${errorMessage} <!-- OR --> ${successMessage} <!-- OR --> ${warningMessage}
                         <%
                             session.setAttribute("errorMessage",null);
+                            session.setAttribute("warningMessage",null);
                             session.setAttribute("successMessage",null);
                         %>
                         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">

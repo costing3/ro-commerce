@@ -65,11 +65,11 @@ public class Product {
         else return defaultImage;
     }
 
-    public List<Product> getProducts(String searchString, Integer userID) {
+    public List<Product> getProducts(String searchString, Integer categoryID) {
         List<Product> productArrayList = new ArrayList<>();
 
         Connection conn;
-        String sql;
+        String sql = null;
         Statement stmt = null;
 
         ResultSet rs = null;
@@ -79,7 +79,7 @@ public class Product {
             conn = DriverManager.getConnection(DBConnector.DB_URL, DBConnector.USER, DBConnector.PASS);
 
             stmt = conn.createStatement();
-            if(userID==null) {
+            if (categoryID == null) {
                 sql = "SELECT product_id,name,price,quantity,image_link FROM products where name LIKE '%" + searchString + "%';";
 
                 rs = stmt.executeQuery(sql);
@@ -94,16 +94,23 @@ public class Product {
                     item.setImageLink(rs.getString(5));
                     productArrayList.add(item);
                 }
-            }
-            else if(searchString == null){
-                sql = "select name, price, image_link from products, shoppingcarts\n" +
-                        "where customer_id = "+ userID +" AND product_id\n" +
-                        "in (product0_id, product1_id, product2_id, product3_id, product4_id, product5_id, product6_id, product7_id, product8_id, product9_id);";
-
+            } else if (searchString == null) {
+                sql = "SELECT product_id,name,price,quantity,image_link FROM products where category_id = " + categoryID + ";";
                 rs = stmt.executeQuery(sql);
+                System.out.println(">> Searching for products by categoryID = '" + categoryID);
+                while (rs.next()) {
+                    Product item = new Product();
+                    item.setID(rs.getInt(1));
+                    item.setName(rs.getString(2));
+                    item.setPrice(rs.getDouble(3));
+                    item.setQuantity(rs.getInt(4));
+                    item.setImageLink(rs.getString(5));
+                    productArrayList.add(item);
+                }
             }
+            System.out.println(">>[DEBUG]: SQL: "+sql);
+            assert rs != null;
             rs.close();
-
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
@@ -122,7 +129,7 @@ public class Product {
 
         Connection conn;
         String sql;
-        Statement stmt = null;
+        Statement stmt;
 
         ResultSet rs;
         try {

@@ -4,12 +4,14 @@
 <%
     String userID = (String) session.getAttribute("uID"); // Logged in user's name
     String searchedItem = request.getParameter("query"); // Did the user search for anything? Yes - Fill the search bar, No - Do nothing
-    List<String> categoryItems = (List<String>) session.getAttribute("categories");
 
     int cartItems;
     if(session.getAttribute("cartItems") != null)
         cartItems = (Integer)session.getAttribute("cartItems");
-    else cartItems=0;
+    else {
+        session.setAttribute("cartItems",0);
+        cartItems=0;
+    }
 %>
 <%--================================================================================================================--%>
 
@@ -65,15 +67,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                             <%
-                                CategoryDisplay categories = new CategoryDisplay();
-
-                                if(session.getAttribute("categories") == null) {
-                                    categoryItems = categories.getCategories();
-                                    session.setAttribute("categories",categoryItems);
-                                }
-
-                                for (String categoryItem : categoryItems)
-                                    out.print("<a class=\"dropdown-item\" href=\"#\"> " + categoryItem + "</a>");
+                                out.print("<a class=\"dropdown-item\" href=\"#\"> Salut1 </a>");
                             %>
                         </div>
                     </div>
@@ -112,9 +106,14 @@
         </div>&nbsp;
         <a href="cart">
             <button type="button" class="btn btn-primary"><i class="fas fa-shopping-cart"></i>
-            My Cart <span class="badge badge-light">
-                    <% out.print(cartItems); %>
-                </span>
+            My Cart <%
+                    if(userID != null) {
+                        out.print("<span class=\"badge badge-light\">");
+                        out.print(cartItems);
+                        out.print("</span>");
+                    }
+                %>
+
             </button>&nbsp;
         </a>
     </div>

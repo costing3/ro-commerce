@@ -16,7 +16,8 @@ public class Login extends HttpServlet {
 
         if (userObject.correctCredentials(request.getParameter("username"),request.getParameter("password"))) {
 
-            HttpSession session = request.getSession(false);
+            HttpSession session = request.getSession(true);
+            session.setMaxInactiveInterval(600); // The session will expire in 10 minutes, starting from user's last request
             session.setAttribute("uID",request.getParameter("username")); //TODO: Get more info about the logged in user
             session.setAttribute("uCartItems", 0); //TODO: Get info from database or set to 0 on login & logout?
             response.sendRedirect("homepage");
