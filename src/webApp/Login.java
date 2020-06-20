@@ -1,6 +1,7 @@
 package webApp;
 
 import appLayer.UserValidation;
+import dataLayer.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,14 +13,25 @@ import java.io.IOException;
 public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        UserValidation userObject = new UserValidation();
+        UserValidation userValidation = new UserValidation();
+        User myUser = new User();
 
-        if (userObject.correctCredentials(request.getParameter("username"),request.getParameter("password"))) {
+        if (userValidation.correctCredentials(request.getParameter("username"),request.getParameter("password"))) {
+            myUser = myUser.getUserDetailsByName(request.getParameter("username"));
 
             HttpSession session = request.getSession(true);
-            session.setMaxInactiveInterval(600); // The session will expire in 10 minutes, starting from user's last request
-            session.setAttribute("uID",request.getParameter("username")); //TODO: Get more info about the logged in user
-            session.setAttribute("uCartItems", 0); //TODO: Get info from database or set to 0 on login & logout?
+
+            if (request.getParameter("rememberMe")==null)
+                session.setMaxInactiveInterval(600); // The session will expire in 10 minutes, starting from user's last request
+            session.setAttribute("userID",myUser.getCustomerID());
+            session.setAttribute("userName",myUser.getEmail());
+            session.setAttribute("firstName",myUser.getFirstName());
+            session.setAttribute("lastName",myUser.getLastName());
+            session.setAttribute("address",myUser.getAddress());
+            session.setAttribute("city",myUser.getCity());
+            session.setAttribute("zipcode",myUser.getZipCode());
+            session.setAttribute("uCartItems", 0);
+
             response.sendRedirect("homepage");
         }
         else {

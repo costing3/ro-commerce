@@ -35,6 +35,37 @@
     </servlet>
 
 
+    <servlet>
+        <servlet-name>Payment</servlet-name>
+        <servlet-class>webApp.Payment</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Validation</servlet-name>
+        <servlet-class>appLayer.PaymentValidation</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>webApp.Profile</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MyOrders</servlet-name>
+        <servlet-class>webApp.MyOrders</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ChangeDetails</servlet-name>
+        <servlet-class>webApp.ChangeDetails</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Administration</servlet-name>
+        <servlet-class>webApp.Profile</servlet-class>
+    </servlet>
+
+
 
     <!--    UP | SERVLETS  -->
     <!--  DOWN | MAPPING  -->
@@ -69,6 +100,35 @@
         <url-pattern>/cart</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>Payment</servlet-name>
+        <url-pattern>/payment</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Validation</servlet-name>
+        <url-pattern>/validation</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MyOrders</servlet-name>
+        <url-pattern>/orders</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ChangeDetails</servlet-name>
+        <url-pattern>/edit-profile</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Administration</servlet-name>
+        <url-pattern>/admin-panel</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

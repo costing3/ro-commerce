@@ -1,65 +1,91 @@
 <%@include file="includes/header.jsp" %>
-<% if(session.getAttribute("uID") != null) {
-    session.setAttribute("warningMessage", "<div style=\"position: absolute; right: 0px;\" class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">\n" +
-            "  <strong>You're logged in!<br></strong>You're unable to create another account while signed in! <a href=\"logout.jsp\">Log out</a> first.\n" +
-            "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
-            "    <span aria-hidden=\"true\">&times;</span>\n" +
-            "  </button>\n" +
-            "</div>");
-    response.sendRedirect("homepage");
+<% if(session.getAttribute("userName") != null) {
+	session.setAttribute("warningMessage", "<div style=\"position: absolute; right: 0px;\" class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">\n" +
+			"  <strong>You're logged in!<br></strong>You're unable to create another account while signed in! <a href=\"logout.jsp\">Log out</a> first.\n" +
+			"  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
+			"    <span aria-hidden=\"true\">&times;</span>\n" +
+			"  </button>\n" +
+			"</div>");
+	response.sendRedirect("homepage");
 }
 %>
-<%--================================================================================================================--%>
-<%--DONETODO: Make servlet shortcut "/REGISTER"--%>
-<div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-            <form class="login100-form validate-form"  autocomplete="off" action="register" method="post">
-					<span class="login100-form-title p-b-33"><i class="fas fa-plus-circle fa-3x"></i><br>
-						Account Register
-					</span>
-<%--                        TODO: Data validation!!--%>
-                <div class="wrap-input100 validate-input" data-validate = "Ex. 'John'">
-                    <input class="input100" type="text" name="firstname" placeholder="First Name">
-                    <span class="focus-input100-1"></span>
-                    <span class="focus-input100-2"></span>
-                </div>
 
-                <div class="wrap-input100 validate-input" data-validate = "Ex. 'Doe'">
-                    <input class="input100" type="text" name="lastname" placeholder="Last Name">
-                    <span class="focus-input100-1"></span>
-                    <span class="focus-input100-2"></span>
-                </div>
+<%--<section class="section-content padding-y">--%>
+<!-- ============================ COMPONENT REGISTER   ================================= -->
+	<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
+      <article class="card-body">
+		<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
+		  ${errorMessage} <!-- OR --> ${successMessage} <!-- OR --> ${warningMessage}
+		  <%
 
-                <div class="wrap-input100 validate-input" data-validate = "Valid email is required: name@domain.country">
-                    <input class="input100" type="text" name="username" placeholder="Username">
-                    <span class="focus-input100-1"></span>
-                    <span class="focus-input100-2"></span>
-                </div>
+			  session.setAttribute("errorMessage",null);
+			  session.setAttribute("warningMessage",null);
+			  session.setAttribute("successMessage",null);
+		  %>
+		<form name="registerForm" action="register" method="post">
+				<div class="form-row">
+					<div class="col form-group">
+						<label><i class="fas fa-address-card"></i> First name</label>
+					  	<input type="text" name="firstname" class="form-control" placeholder="">
+					</div> <!-- form-group end.// -->
+					<div class="col form-group">
+						<label><i class="far fa-address-card"></i> Last name</label>
+					  	<input type="text" name="lastname" class="form-control" placeholder="">
+					</div> <!-- form-group end.// -->
+				</div> <!-- form-row end.// -->
+				<div class="form-group">
+					<label><i class="fa fa-envelope"></i> Email</label>
+					<input type="email" name="username" class="form-control" placeholder="">
+					<small class="form-text text-muted">We'll never share your email with anyone else.</small>
+				</div> <!-- form-group end.// -->
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label><i class="fas fa-calendar-alt"></i> Age</label>
+						<input type="text" name="age" class="form-control">
+					</div>
+					<div class="form-group col-md-6">
+						<label><i class="fas fa-globe"></i> Country</label>
+						<select id="inputState" name="country" class="form-control">
+							<option> ------------- </option>
+							<option value="Romania" selected="">Romania</option>
+							<option value="United Kingdom">United Kingdom</option>
+							<option value="United States">United States</option>
+						</select>
+					</div> <!-- form-group end.// -->
+				</div>
+				<div class="form-group">
+					<label><i class="fas fa-map-marked-alt"></i> Address</label>
+					<input type="text" name="address" class="form-control">
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+					  <label><i class="fas fa-map-marked-alt"></i> City</label>
+					  <input type="text" name="city" class="form-control">
+					</div>
+					<div class="form-group col-md-6">
+						<label><i class="fas fa-at"></i> Zipcode</label>
+						<input type="text" name="zipcode" class="form-control">
+					</div> <!-- form-group end.// -->
+				</div> <!-- form-row.// -->
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label><i class="fa fa-lock"></i> Create password</label>
+					    <input class="form-control" name="password" type="password">
+					</div> <!-- form-group end.// --> 
+					<div class="form-group col-md-6">
+						<label><i class="fa fa-lock"></i> Repeat password</label>
+					    <input class="form-control" name="validatePassword" type="password">
+					</div> <!-- form-group end.// -->  
+				</div>
+			    <div class="form-group">
+			        <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+			    </div> <!-- form-group// -->
+			</form>
+		</article><!-- card-body.// -->
+    </div> <!-- card .// -->
+    <p class="text-center mt-4">Already have an account? <a href="login">Log In</a></p>
+    <br><br>
+<!-- ============================ COMPONENT REGISTER  END.// ================================= -->
 
-                <div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-                    <input class="input100" type="password" name="password" placeholder="Password">
-                    <span class="focus-input100-1"></span>
-                    <span class="focus-input100-2"></span>
-                </div>
 
-                <div class="container-login100-form-btn m-t-20">
-                    <button class="login100-form-btn"><i class="fas fa-plus-circle"></i>&nbsp;
-                        Register New Account
-                    </button>
-                </div>
-                <div class="text-center p-t-45 p-b-4">
-						<span class="txt1"><i class="fas fa-sign-out-alt"></i>
-							Already
-						</span>
-                        <a href="login" class="txt2 hov1">
-                        have an account?
-                    </a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<%--================================================================================================================--%>
-<%@include file="includes/footer.jsp" %>
+<%--</section>--%>

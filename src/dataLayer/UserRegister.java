@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class UserRegister {
 
-    public boolean newUser(String sFirstName, String sLastName, String sUserName, String sUserPassword) {
+    public boolean newUser(String sFirstName, String sLastName, String sUserName, String sUserPassword,  Integer age, String country, String city, Integer zipcode, String address) {
 
         boolean isNewUser = true;
 
@@ -28,7 +28,8 @@ public class UserRegister {
 
             if (!rs.next()) {
                 System.out.println(">> "+ sFirstName +" has registered. ");
-                sql = "INSERT INTO customers (firstname, lastname, username, password) values ('" + sFirstName + "', '" + sLastName + "', '" + sUserName + "', MD5('" + sUserPassword + "'))";
+                sql = "INSERT INTO customers (firstname, lastname, username, password, age, country, city, zipcode, address) " +
+                        "values ('" + sFirstName + "', '" + sLastName + "', '" + sUserName + "', MD5('" + sUserPassword + "'), '"+ age +"', '"+ country +"', '"+ city +"', '"+ zipcode +"', '"+ address +"' );";
                 
                 System.out.println(">> [DEBUG][Executing SQL]: " + sql);
 

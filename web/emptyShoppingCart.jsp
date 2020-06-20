@@ -14,9 +14,9 @@
 <div class="cart-wrap">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
-                <div style="position: relative; left: 35%;" class="alert alert-warning" role="alert">
-                    <h4 class="alert-heading">Hi, <% out.print(userID+"!"); %></h4>
+            <div class="col-lg-8"><br><br>
+                <div style="position: relative; left: 20%;" class="alert alert-warning" role="alert">
+                    <h4 class="alert-heading">Hi, <% out.print(firstName+"!"); %></h4>
                     <p>Your shopping cart is <b>empty!</b></p>
                     <hr>
                     <p class="mb-0">You have not added any products in your shopping bag!
@@ -34,5 +34,4 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <%--================================================================================================================--%>
-<%@include file="includes/footer.jsp" %>
 

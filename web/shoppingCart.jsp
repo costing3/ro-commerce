@@ -1,139 +1,167 @@
 <%@ page import="dataLayer.Product" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
 <%@include file="includes/header.jsp" %>
 
-<%--================================================================================================================--%>
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg">
+<div class="container">
+	<h2 class="title-page">Shopping cart</h2>
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION INTRO END// ========================= -->
 
-<%--<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">--%>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+<div class="container">
 
+<div class="row">
+	<main class="col-md-9">
+<div class="card">
 
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="css/shoppingcart.css">
-<div class="cart-wrap">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="main-heading">Shopping Cart</div>
-                <div class="table-cart">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Image <i style="padding-left:120px;">Product</i></th>
-                            <th style="padding-left:25px;">Quantity</th>
-                            <th style="padding-left:50px;">Total</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <%session.setAttribute("discount",4200);
-                            List<Product> cartProducts = (List<Product>) session.getAttribute("cartProducts");
-                            float price=0;
-                            float discount=0;
-                            System.out.print("\n>> [DEBUG]cartProducts List: "+cartProducts);
-                            System.out.print("\n>> [DEBUG]cartProducts from sessionAttribute: "+session.getAttribute("cartProducts"));
-                            for (Product cartProduct:cartProducts) {
-                                out.print("<tr>\n" +
-                                        "                            <td>\n" +
-                                        "                                <div class=\"display-flex align-center\">\n" +
-                                        "                                    <div class=\"img-product\">");
-                                out.print("<a href=\"product?id="+cartProduct.getID()+"\" style=\"text-decoration: none;\">");
-                                out.print("<img src=\"" + cartProduct.getImageLink() + "\" alt=\"\" class=\"mCS_img_loaded\"");
-                                out.print("<img src=\"images/placeholder.png\" alt=\"\" class=\"mCS_img_loaded\">");
-                                out.print("</div>\n" +
-                                        "                                    <div class=\"name-product\">");
-                                out.print(cartProduct.getName()+"</a>");
-                                out.print("</div>\n" + //TODO: The dynamic count / update
-                                        "                                </div>\n" +
-                                        "                            </td>\n" +
-                                        "                            <td class=\"product-count\">\n" +
-                                        "                                <form action=\"#\" class=\"count-inlineflex\">\n" +
-                                        "                                    <div class=\"qtyminus\">-</div>\n" +
-                                        "                                    <input type=\"text\" name=\"quantity\" value=\"1\" class=\"qty\">\n" +
-                                        "                                    <div class=\"qtyplus\">+</div>\n" +
-                                        "                                </form>\n" +
-                                        "                            </td>\n" +
-                                        "                            <td>\n" +
-                                        "                                <div class=\"total\">");
-                                out.print("RON "+ cartProduct.getPrice());
-                                out.print("<div>\n" +
-                                        "                            </td>\n" +
-                                        "                            <td>\n" +
-                                        "                                <a href=\"#\" title=\"\">\n" +
-                                        "                                    <img src=\"images/icons/delete.png\" alt=\"\" class=\"mCS_img_loaded\">\n" +
-                                        "                                </a>\n" +
-                                        "                            </td>\n" +
-                                        "                        </tr>");
-                                price += cartProduct.getPrice();
-                            }
-                        %>
-                        </tbody>
-                    </table>
-                    <div class="coupon-box">
-                        <form action="#" method="get" accept-charset="utf-8">
-                            <div class="coupon-input">
-                                <input type="text" name="coupon code" placeholder="Coupon Code">
-                                <button type="submit" class="round-black-btn">Apply Coupon</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <!-- /.table-cart -->
-            </div>
-            <!-- /.col-lg-8 -->
-            <div class="col-lg-4">
-                <div class="cart-totals">
-                    <h3>Cart Totals</h3>
-                    <form action="#" method="get" accept-charset="utf-8">
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>Subtotal</td>
-                                <td class="subtotal"><% out.print("RON "+price); %></td>
-                            </tr>
-                            <tr>
-                                <td>Shipping</td>
-                                <td class="free-shipping">Free Shipping</td>
-                            </tr>
-                            <% if(session.getAttribute("discount")!=null){
-                                discount=(Integer)session.getAttribute("discount");
-                                out.print("<span style=\"color:red;\">\n" +
-                                        "                                <td>Discount</td>\n" +
-                                        "                                <td class=\"subtotal\">"+discount+"</td>\n" +
-                                        "                                </tr>\n" +
-                                        "                            </span>");
-                            }%>
-                            <tr class="total-row">
-                                <td>Total</td>
-                                <td class="price-total"><%
-                                    price=price-discount;//TODO: Document this
-                                    if(price>0)
-                                        out.print("RON "+price);
-                                    else out.print("FREE!");
-                                %></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="btn-cart-totals">
-                            <a href="#" class="update round-black-btn" title="">Update Cart</a>
-                            <a href="#" class="checkout round-black-btn" title="">Proceed to Checkout</a>
-                        </div>
-                        <!-- /.btn-cart-totals -->
-                    </form>
-                    <!-- /form -->
-                </div>
-                <!-- /.cart-totals -->
-            </div>
-            <!-- /.col-lg-4 -->
-        </div>
-    </div>
+<table class="table table-borderless table-shopping-cart">
+<thead class="text-muted">
+<tr class="small text-uppercase">
+  <th scope="col">Product</th>
+  <th scope="col" width="120"></th>
+  <th scope="col" width="120">Price</th>
+  <th scope="col" class="text-right" width="200"> </th>
+</tr>
+</thead>
+<tbody>
+<%
+	session.setAttribute("discount",30);
+    List<Product> cartProducts = (List<Product>) session.getAttribute("cartProducts");
+    int price=0;
+    int discount=0;
+    int delivery=20;
+    for (Product cartProduct:cartProducts) {
+		out.print("<tr>\n" +
+				"\t<td>\n" +
+				"\t\t<figure class=\"itemside\">\n" +
+				"\t\t\t<div class=\"aside\"><img src=\"" + cartProduct.getImageLink() + "\" class=\"img-sm\" width=\"80\" height=\"80\"></div>\n" +
+				"\t\t\t<figcaption class=\"info\">\n" +
+				"\t\t\t\t<a href=\"product?id=" + cartProduct.getID() + "\" class=\"title text-dark\">");
+		out.print(cartProduct.getName());
+		out.print("<p class=\"text-muted small\">" + cartProduct.getDescription() + "</a>");
+		out.print("</figcaption>\n" +
+				"\t\t</figure>\n" +
+				"\t</td>");
+		out.print("<td> \n" +
+
+				"\t</td>");
+		out.print("<td> \n" +
+				"\t\t<div class=\"price-wrap\"> \n" +
+				"\t\t\t<var class=\"price\">RON " + cartProduct.getPrice() + "</var> \n" +
+				"\t\t\t<small class=\"text-muted\"> VAT Included </small> \n" +
+				"\t\t</div> <!-- price-wrap .// -->\n" +
+				"\t</td>");
+		out.print("<td class=\"text-right\"> \n" +
+				"\t<a href=\"remove\" class=\"btn btn-light\"> Remove</a>\n" +
+				"\t</td>");
+		out.print("</tr>");
+		price += cartProduct.getPrice();
+	}
+%>
+</tbody>
+</table>
+
+<div class="card-body border-top">
+	<a href="payment" class="btn btn-primary float-md-right"> Make Purchase <i class="fa fa-chevron-right"></i> </a>
+	<a <% out.print("href=\"search?query="+ session.getAttribute("query") +"\""); %> class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
+</div>	
+</div> <!-- card.// -->
+
+<div class="alert alert-success mt-3">
+	<% if(price>=400) {
+			delivery=0;
+			out.print("<p class=\"icontext\"><i class=\"icon text-success fa fa-truck\"></i> Free Delivery for this order - Subtotal price is higher than RON 400</p>");
+	}
+	%>
 </div>
-<script src="js/shoppingcart.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<%--================================================================================================================--%>
-<%@include file="includes/footer.jsp" %>
+	</main> <!-- col.// -->
+	<aside class="col-md-3">
+		<div class="card mb-3">
+			<div class="card-body">
+			<form>
+				<div class="form-group">
+					<label>Have coupon?</label>
+					<div class="input-group">
+						<input type="text" class="form-control" name="" placeholder="Coupon code">
+						<span class="input-group-append"> 
+							<button class="btn btn-primary">Apply</button>
+							<br>
+						</span>
+					</div>
+					<br>
+					<p class="label-rating text-success"><i class="fas fa-check"></i> Coupon applied! </p>
+				</div>
+			</form>
+			</div> <!-- card-body.// -->
+		</div>  <!-- card .// -->
+		<div class="card">
+			<div class="card-body">
+					<dl class="dlist-align">
+					  <dt>Subtotal:</dt>
+					  <dd class="text-right">RON <% out.print(price); %></dd>
+					</dl>
+					<dl class="dlist-align">
+					  <dt>Discount:</dt>
+					  <dd class="text-right">
+						  <%
+							  if(session.getAttribute("discount")!=null){
+							  	discount=(Integer)session.getAttribute("discount");
+							  	out.print("-"+ discount +"%");
+							  }
+							  else out.print("No discount");
+						  %>
+					  </dd>
+					</dl>
+					<dl class="dlist-align">
+						<dt>Shipping: </dt>
+						<dd class="text-right">
+							<% if(delivery>0) out.print("RON "+delivery);
+								else out.print("Free delivery");
+							%>
+						</dd>
+					</dl>
+					<dl class="dlist-align">
+					  <dt>Total:</dt>
+					  <dd class="text-right  h5"><strong>
+						  <%
+							  price -= discount/100*price+delivery;
+							  if(price>0)
+							  	out.print("RON "+ price);
+							  else out.print("FREE!");
+							  session.setAttribute("orderPrice",price);
+						  %>
+					  </strong></dd>
+					</dl>
+					<hr>
+					<p class="text-center mb-3">
+						<img src="images/misc/payments.png" height="26">
+					</p>
+					
+			</div> <!-- card-body.// -->
+		</div>  <!-- card .// -->
+	</aside> <!-- col.// -->
+</div>
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name bg padding-y">
+<div class="container">
+<h6>Payment and refund policy</h6>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+</div><!-- container // -->
+</section>

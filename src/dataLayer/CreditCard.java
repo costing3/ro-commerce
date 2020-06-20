@@ -1,13 +1,12 @@
 package dataLayer;
 
-import javax.servlet.http.HttpSession;
 import java.sql.*;
 
-public class UserLogin {
+public class CreditCard {
 
-    public boolean validateCredentials(String sUserName, String sUserPassword) {
+    public boolean isValidCC(String ccNumber, String ccExpMo, String ccExpYr, String cvv) {
 
-        boolean isValidUser = false;
+        boolean validCC = false;
 
         Connection conn;
         String sql;
@@ -20,17 +19,19 @@ public class UserLogin {
             conn = DriverManager.getConnection(DBConnector.DB_URL, DBConnector.USER, DBConnector.PASS);
 
             stmt = conn.createStatement();
-            sql = "SELECT * FROM customers WHERE username = '" + sUserName + "' AND password = MD5('" + sUserPassword + "')";
+            sql = "SELECT Type FROM creditcards WHERE Number="+ ccNumber +" AND Month="+ ccExpMo +" AND Year="+ ccExpYr +" AND CVV="+ cvv +";";
 
-            System.out.println(">> [DEBUG][Executing SQL]: " + sql);
+            System.out.println("\n>> [DEBUG][Executing SQL]: " + sql);
 
             rs = stmt.executeQuery(sql);
 
             if (rs.next()) {
-                isValidUser = true;
-                System.out.println(">> "+ sUserName +" has logged in.");
+                if(rs.getString(1).equals("Valid")) {
+                    validCC = true;
+                    System.out.println("\n>> The credit card is confirmed " + sql);
+                }
+                else System.out.println("\n>> The credit card is denied " + sql);
             }
-
             rs.close();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -42,6 +43,6 @@ public class UserLogin {
                 se.printStackTrace();
             }
         }
-        return isValidUser;
+        return validCC;
     }
 }

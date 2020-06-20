@@ -1,71 +1,55 @@
 <%@include file="includes/header.jsp" %>
-<%--<% if(session.getAttribute("uID") != null) {--%>
-<%--    session.setAttribute("warningMessage", "<div style=\"position: absolute; right: 0px;\" class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">\n" +--%>
-<%--            "  <strong>You're already logged in!<br></strong>You are already logged in! If you want to sign in as a different user, <a href=\"logout.jsp\">log out</a> first.\n" +--%>
-<%--            "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +--%>
-<%--            "    <span aria-hidden=\"true\">&times;</span>\n" +--%>
-<%--            "  </button>\n" +--%>
-<%--            "</div>");--%>
-<%--    response.sendRedirect("homepage");--%>
-<%--}--%>
-<%--%>--%>
-<%--================================================================================================================--%>
-        <div class="limiter">
-            <div class="container-login100">
-                <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+<% if(session.getAttribute("userName") != null)
+        response.sendRedirect("homepage");
+%>
 
-                    <form class="login100-form validate-form"  autocomplete="off" method="post">
-					<span class="login100-form-title p-b-33"><i class="fas fa-sign-out-alt fa-3x"></i><br>
-						Account Login
-					</span>
-<%--                        TODO: Data validation!!--%>
-                        ${errorMessage} <!-- OR --> ${successMessage} <!-- OR --> ${warningMessage}
-                        <%
-                            session.setAttribute("errorMessage",null);
-                            session.setAttribute("warningMessage",null);
-                            session.setAttribute("successMessage",null);
-                        %>
-                        <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                            <input class="input100" type="text" name="username" placeholder="Username">
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
+<section class="section-conten padding-y" style="min-height:84vh">
+
+    <!-- ============================ COMPONENT LOGIN   ================================= -->
+    <div class="card mx-auto" style="max-width: 380px; margin-top:100px;">
+        <div class="card-body">
+            <h4 class="card-title mb-4">Sign in</h4>
+            ${errorMessage} <!-- OR --> ${successMessage} <!-- OR --> ${warningMessage}
+            <%
+//                out.print(session.getAttribute("successMessage"));
+//                out.print(session.getAttribute("warningMessage"));
+//                out.print(session.getAttribute("errorMessage"));
+                session.setAttribute("errorMessage",null);
+                session.setAttribute("warningMessage",null);
+                session.setAttribute("successMessage",null);
+            %>
+            <form method="post">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                         </div>
-
-                        <div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-                            <input class="input100" type="password" name="password" placeholder="Password">
-                            <span class="focus-input100-1"></span>
-                            <span class="focus-input100-2"></span>
+                        <input name="username" class="form-control" placeholder="Email" type="text">
+                    </div>
+                </div> <!-- form-group// -->
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                         </div>
+                        <input name="password" class="form-control" placeholder="Password" type="password">
+                    </div>
+                </div> <!-- form-group// -->
 
-                        <div class="container-login100-form-btn m-t-20">
-                            <button class="login100-form-btn"><i class="fas fa-sign-out-alt"></i>&nbsp;
-                                Sign in
-                            </button>
+                <div class="form-group">
+                    <a href="forgotPassword.jsp" class="float-right">Forgot password?</a>
+                    <label class="float-left custom-control custom-checkbox"> <input type="checkbox" name="rememberMe" class="custom-control-input"> <div class="custom-control-label"> Remember </div> </label>
+                </div> <!-- form-group form-check .// -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+                </div> <!-- form-group// -->
+            </form>
+        </div> <!-- card-body.// -->
+    </div> <!-- card .// -->
 
-                        </div>
-                        <div class="text-center p-t-45 p-b-4">
-						<span class="txt1"><i class="fas fa-key"></i>
-							Forgot
-						</span>
+    <p class="text-center mt-4">Don't have account? <a href="register">Sign up</a></p>
+    <br><br>
+    <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
 
-                            <a href="#" class="txt2 hov1">
-                                Username / Password?
-                            </a>
-                        </div>
 
-                        <div class="text-center">
-						<span class="txt1"><i class="fas fa-plus-circle"></i>
-							Don't have an account?
-						</span>
-
-                            <a href="register" class="txt2 hov1">
-                                Sign up
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-<%--================================================================================================================--%>
-<%@include file="includes/footer.jsp" %>
+</section>
